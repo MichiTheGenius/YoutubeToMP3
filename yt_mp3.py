@@ -17,7 +17,7 @@ def reset_color():
 
 
 def print_blue_text(text):
-    print(f'{blue}{text}')
+    print(f'{blue}{text}', end="")
     reset_color()
 
 
@@ -25,16 +25,17 @@ def main():
     url = input("Enter url: ")
     my_video = pytube.YouTube(url)
 
+    print_blue_text("video is downloading!")
+
     # get the audio file out of all the options
     finished_video = my_video.streams.filter(
         audio_codec="mp4a.40.2", mime_type="audio/mp4").first()
 
-    print_blue_text("Video is downloading!")
     # download that file
     finished_video.download("Music/")
     print_blue_text("finished downloading!")
 
-    print_blue_text("Converting to mp3")
+    print_blue_text("converting to mp3!")
 
     # input filename for ffmpeg
     mp4_file = f"Music/{finished_video.default_filename}"
