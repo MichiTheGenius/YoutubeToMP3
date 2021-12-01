@@ -47,12 +47,12 @@ def main():
             break
         pytube_video = pytube.YouTube(url)
 
-        print_blue_text("video is downloading!")
+        download_path = get_path_from_file()
+        print_blue_text(f"video is downloading in {download_path}!")
 
         # get the audio file out of all the options
         correct_video = filter_out_correct_video(pytube_video)
 
-        download_path = get_path_from_file()
         # download that file
         correct_video.download(download_path)
         print_blue_text("finished downloading!")
@@ -75,6 +75,7 @@ def main():
         os.remove(mp4_file)
 
         print_blue_text("finished converting!")
+        print_blue_text(f"Find your tunes in the folder {download_path}!")
 
 
 if __name__ == "__main__":
