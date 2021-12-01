@@ -40,15 +40,33 @@ def get_path_from_file():
     return path
 
 
+def write_path_to_file(path):
+    with open("path.txt", "w") as path_file:
+        path_file.write(path)
+
+
 def main():
     while True:
-        url = input("Enter url(or q to quit): ")
+        url = input(
+            "Enter url(or q to quit, c to change the path, l to list the path): ")
         if url.lower() == 'q':
             break
+        elif url.lower() == 'c':
+            current_path = get_path_from_file()
+            new_path = input(
+                f"Enter a new download path (The current one is {current_path}): ")
+            if new_path != "":
+                write_path_to_file(new_path)
+            continue
+        elif url.lower() == 'l':
+            current_path = get_path_from_file()
+            print(f"The current path is {current_path}")
+            continue
+
         pytube_video = pytube.YouTube(url)
 
         download_path = get_path_from_file()
-        print_blue_text(f"video is downloading in {download_path}!")
+        print_blue_text(f"video is downloading to {download_path}!")
 
         # get the audio file out of all the options
         correct_video = filter_out_correct_video(pytube_video)
