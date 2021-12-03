@@ -45,6 +45,19 @@ def write_path_to_file(path):
         path_file.write(path)
 
 
+def change_path():
+    current_path = get_path_from_file()
+    new_path = input(
+        f"Enter a new download path (The current one is {current_path}): ")
+    if new_path != "":
+        write_path_to_file(new_path)
+
+
+def list_path():
+    current_path = get_path_from_file()
+    print(f"The current path is {current_path}")
+
+
 def main():
     while True:
         url = input(
@@ -52,15 +65,10 @@ def main():
         if url.lower() == 'q':
             break
         elif url.lower() == 'c':
-            current_path = get_path_from_file()
-            new_path = input(
-                f"Enter a new download path (The current one is {current_path}): ")
-            if new_path != "":
-                write_path_to_file(new_path)
+            change_path()
             continue
         elif url.lower() == 'l':
-            current_path = get_path_from_file()
-            print(f"The current path is {current_path}")
+            list_path()
             continue
 
         pytube_video = pytube.YouTube(url)
