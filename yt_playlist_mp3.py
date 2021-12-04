@@ -2,6 +2,7 @@ import pytube
 import os
 from pytube import Playlist
 
+# ansi color codes to print out colored text in the terminal
 black = "\u001b[30m"
 red = "\u001b[31m"
 green = "\u001b[32m"
@@ -13,6 +14,7 @@ white = "\u001b[37m"
 reset = "\u001b[0m"
 
 def get_playlist_urls(url):
+    # make an array with all video urls in the playlist with the help of pytube
     playlist = Playlist(url)
 
     video_urls = playlist.video_urls
@@ -32,10 +34,12 @@ def print_red_text(text):
     reset_color()
 
 def filter_out_correct_video(video):
+    # get correct video format -> this took a lot of trying around to fine tune
     return video.streams.filter(audio_codec="mp4a.40.2", mime_type="audio/mp4").first()
 
 
 def get_mp4_file(path, correct_video):
+    # if the path from the user doesn't have a "/" at the end we need to add it 
     if not path.endswith("/"):
         return f"{path}/{correct_video.default_filename}"
     else:
@@ -43,6 +47,7 @@ def get_mp4_file(path, correct_video):
 
 
 def get_path_from_file():
+    # open the path file and assign a path variable the content of that file
     path = ""
     with open("path.txt", "r") as path_file:
         path = path_file.read()
@@ -57,6 +62,7 @@ def write_path_to_file(path):
 def change_path():
     current_path = get_path_from_file()
     new_path = input(f"Enter a new download path (The current one is {current_path}): ")
+    # if the inputted path is empty we don't write it ti the file
     if new_path != "":
         write_path_to_file(new_path)
 
@@ -73,7 +79,7 @@ def main():
             quit()
         elif playlist_url_input.lower() == 'c':
             change_path()
-            continue 
+            continue # jump to start of while loop -> ask the user again what he wants to do
         elif playlist_url_input.lower() == 'l':
             list_path()
             continue
@@ -82,12 +88,17 @@ def main():
 
     playlist_urls = get_playlist_urls(playlist_url_input)
 
+    # first video should be 1 in youtube -> first element in array is 0 -> -1 solves the problem
     start_index = int(input("Enter start index: ")) - 1
-    end_index = int(input("Enter end index: ")) - 1
 
-    for i in range(start_index, end_index+1):
+    # youtubes last video is e.g. 10 -> loop ends at 9 -> array ends at 9 -> perfect
+    end_index = int(input("Enter end index: "))
+
+    for i in range(start_index, end_index):
+        # make a video out of the current url in the loop that pytube can use
         pytube_video = pytube.YouTube(playlist_urls[i])
-
+        
+        # get the current download path from the text file
         download_path = get_path_from_file()
         print_blue_text(f"video is downloading to {download_path}!")
 

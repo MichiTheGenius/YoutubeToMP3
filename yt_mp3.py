@@ -1,6 +1,7 @@
 import pytube
 import os
 
+# ansi color codes to print out colored text in the terminal
 black = "\u001b[30m"
 red = "\u001b[31m"
 green = "\u001b[32m"
@@ -14,34 +15,34 @@ reset = "\u001b[0m"
 def reset_color():
     print(reset)
 
+
 def print_blue_text(text):
     print(f'{blue}{text}', end="")
     reset_color()
 
+def print_red_text(text):
+    print(f'{red}{text}', end="")
+    reset_color()
+
 def filter_out_correct_video(video):
+    # get correct video format -> this took a lot of trying around to fine tune
     return video.streams.filter(audio_codec="mp4a.40.2", mime_type="audio/mp4").first()
 
+
 def get_mp4_file(path, correct_video):
+    # if the path from the user doesn't have a "/" at the end we need to add it 
     if not path.endswith("/"):
         return f"{path}/{correct_video.default_filename}"
     else:
         return f"{path}{correct_video.default_filename}"
 
+
 def get_path_from_file():
+    # open the path file and assign a path variable the content of that file
     path = ""
     with open("path.txt", "r") as path_file:
         path = path_file.read()
     return path
-
-def write_path_to_file(path):
-    with open("path.txt", "w") as path_file:
-        path_file.write(path)
-
-def change_path():
-    current_path = get_path_from_file()
-    new_path = input(f"Enter a new download path (The current one is {current_path}): ")
-    if new_path != "":
-        write_path_to_file(new_path)
 
 def list_path():
     current_path = get_path_from_file()
@@ -51,14 +52,15 @@ def main():
     while True:
         url = input("Enter url(or q to quit, c to change the path, l to list the path): ")
         if url.lower() == 'q':
-            break
+            break # quit the loop -> program finishes
         elif url.lower() == 'c':
             change_path()
-            continue
+            continue # jump to start of while loop -> ask the user again what he wants to do
         elif url.lower() == 'l':
             list_path()
             continue
 
+        # make a video out of the current url in the loop that pytube can use
         pytube_video = pytube.YouTube(url)
 
         download_path = get_path_from_file()
