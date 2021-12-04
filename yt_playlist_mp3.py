@@ -91,10 +91,10 @@ def main():
     amount_of_videos = len(playlist_urls)
     print(f"You have {amount_of_videos} videos in your playlist")
     # first video should be 1 in youtube -> first element in array is 0 -> -1 solves the problem
-    start_index = int(input("Enter the start index: ")) - 1
+    start_index = int(input("Enter the start index(The first video is always 1): ")) - 1
 
     # youtubes last video is e.g. 10 -> loop ends at 9 -> array ends at 9 -> perfect
-    end_index = int(input("Enter the end index: "))
+    end_index = int(input(f"Enter the end index(the maximum is {amount_of_videos}): "))
 
     for i in range(start_index, end_index):
         # make a video out of the current url in the loop that pytube can use
