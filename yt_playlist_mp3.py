@@ -42,29 +42,17 @@ def get_mp4_file(path, correct_video):
     default_filename = correct_video.default_filename
     # if the path from the user doesn't have a "/" at the end we need to add it 
     if not path.endswith("/"):
-<<<<<<< HEAD
         return f"{path}/{default_filename}"
     else:
         return f"{path}{default_filename}"
-=======
-        return f'{path}/"{default_filename}"'
-    else:
-        return f'{path}"{default_filename}"'
->>>>>>> 93abe899a7cb7b6e7867b3ab978e04fed79e696d
 
 def make_mp3_file(path, correct_video, channel_name):
     default_filename = correct_video.default_filename.replace(".mp4",".mp3")
     # if the path from the user doesn't have a "/" at the end we need to add it 
     if not path.endswith("/"):
-<<<<<<< HEAD
         return f"'{path}/{channel_name} - {default_filename}'"
     else:
         return f"'{path}{channel_name} - {default_filename}'"
-=======
-        return f'{path}/"{channel_name} - {default_filename}"'
-    else:
-        return f'{path}"{channel_name} - {default_filename}"'
->>>>>>> 93abe899a7cb7b6e7867b3ab978e04fed79e696d
 
 def get_path_from_file():
     # open the path file and assign a path variable the content of that file
@@ -120,12 +108,7 @@ def main():
         # make a video out of the current url in the loop that pytube can use
         pytube_video = pytube.YouTube(playlist_urls[i])
         channel_url = pytube_video.channel_url
-<<<<<<< HEAD
         channel_name = pytube.Channel(channel_url).channel_name
-=======
-        channel = pytube.Channel(channel_url)
-        channel_name = channel.channel_name
->>>>>>> 93abe899a7cb7b6e7867b3ab978e04fed79e696d
 
         # get the current download path from the text file
         download_path = get_path_from_file()
@@ -142,19 +125,11 @@ def main():
         
         # input filename for ffmpeg
         mp4_file = get_mp4_file(download_path, correct_video)
-<<<<<<< HEAD
-=======
-        
->>>>>>> 93abe899a7cb7b6e7867b3ab978e04fed79e696d
         # output mp3 file (replace the default .mp4 in the filename with .mp3)
         mp3_output = make_mp3_file(download_path, correct_video, channel_name)
 
         # command to convert mp4 to mp3 with ffmpeg. -i for input, -f for filetype, -ab for bitrate, -vn for no video
-<<<<<<< HEAD
         convert_command = f"ffmpeg -i '{mp4_file}' -f mp3 -ab 192000 -vn {mp3_output}"
-=======
-        convert_command = f"ffmpeg -i {mp4_file} -f mp3 -ab 192000 -vn {mp3_output}"
->>>>>>> 93abe899a7cb7b6e7867b3ab978e04fed79e696d
 
         # execute the convert command
         os.system(convert_command)
