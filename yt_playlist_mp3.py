@@ -39,12 +39,20 @@ def filter_out_correct_video(video):
 
 
 def get_mp4_file(path, correct_video):
+    default_filename = correct_video.default_filename
     # if the path from the user doesn't have a "/" at the end we need to add it 
     if not path.endswith("/"):
-        return f"{path}/{correct_video.default_filename}"
+        return f'{path}/"{default_filename}"'
     else:
-        return f"{path}{correct_video.default_filename}"
+        return f'{path}"{default_filename}"'
 
+def make_mp3_file(path, correct_video, channel_name):
+    default_filename = correct_video.default_filename.replace(".mp4",".mp3")
+    # if the path from the user doesn't have a "/" at the end we need to add it 
+    if not path.endswith("/"):
+        return f'{path}/"{channel_name} - {default_filename}"'
+    else:
+        return f'{path}"{channel_name} - {default_filename}"'
 
 def get_path_from_file():
     # open the path file and assign a path variable the content of that file
@@ -99,7 +107,10 @@ def main():
     for i in range(start_index, end_index):
         # make a video out of the current url in the loop that pytube can use
         pytube_video = pytube.YouTube(playlist_urls[i])
-        
+        channel_url = pytube_video.channel_url
+        channel = pytube.Channel(channel_url)
+        channel_name = channel.channel_name
+
         # get the current download path from the text file
         download_path = get_path_from_file()
         print_blue_text(f"video is downloading to {download_path}!")
@@ -112,15 +123,15 @@ def main():
         print_blue_text("finished downloading!")
 
         print_blue_text("converting to mp3!")
-
+        
         # input filename for ffmpeg
         mp4_file = get_mp4_file(download_path, correct_video)
-
+        
         # output mp3 file (replace the default .mp4 in the filename with .mp3)
-        mp3_output = mp4_file.replace(".mp4", ".mp3")
+        mp3_output = make_mp3_file(download_path, correct_video, channel_name)
 
         # command to convert mp4 to mp3 with ffmpeg. -i for input, -f for filetype, -ab for bitrate, -vn for no video
-        convert_command = f"ffmpeg -i '{mp4_file}' -f mp3 -ab 192000 -vn '{mp3_output}'"
+        convert_command = f"ffmpeg -i {mp4_file} -f mp3 -ab 192000 -vn {mp3_output}"
 
         # execute the convert command
         os.system(convert_command)
