@@ -58,13 +58,8 @@ def get_path_from_file():
     return path
 
 
-def change_path():
-    current_path = get_path_from_file()
-    new_path = input(
-        f"Enter a new download path (The current one is {current_path}): ")
-    # if the inputted path is empty we don't write it ti the file
-    if new_path != "":
-        write_path_to_file(new_path)
+def path_file_exists():
+    return os.path.isfile("path.txt")
 
 
 def write_path_to_file(path):
@@ -72,9 +67,27 @@ def write_path_to_file(path):
         path_file.write(path)
 
 
+def change_path():
+    new_path = ""
+    if path_file_exists():
+        current_path = get_path_from_file()
+        new_path = input(
+            f"Enter a new download path (The current one is {current_path}): ")
+    else:
+        new_path = input(
+            f"Enter a new download path: ")
+
+    # if the inputted path is empty we don't write it ti the file
+    if new_path != "":
+        write_path_to_file(new_path)
+
+
 def list_path():
-    current_path = get_path_from_file()
-    print(f"The current path is {current_path}")
+    if path_file_exists():
+        current_path = get_path_from_file()
+        print(f"The current path is {current_path}")
+    else:
+        print("You don't have a path file yet! Create one by entering c in the url field.")
 
 
 def main():
