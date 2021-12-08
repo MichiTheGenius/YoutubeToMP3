@@ -12,7 +12,7 @@ A program that converts a youtube link to a music mp3 file. It is written in pyt
 	cd YoutubeToMp3Python
 	```
 3. run the requirements.sh script in order to install all dependencies needed
-   (You can look into it to check if you are ok with the things that will be installed)
+	(You can look into it to check if you are ok with the things that will be installed)
 	```sh
 	./requirements.sh
 	```
@@ -31,11 +31,9 @@ A program that converts a youtube link to a music mp3 file. It is written in pyt
 	python3 yt_playlist_mp3.py
 	```
 	
-6. follow the programs intructions
+6. change the download path of your music -> enter c in the url field end enter a valid filepath
+7. follow the programs intructions
 
 ### Help
-- it is strongly recommended to change the directory before running the script
-- for that enter c in the url field and enter a new valid file path
-
 - the indices asked from the playlist asked are the small numbers on the left of a playlist video
 - simply choose the start and end video end everything in between will be downloaded
