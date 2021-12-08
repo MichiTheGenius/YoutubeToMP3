@@ -33,7 +33,10 @@ def filter_out_correct_video(video):
 
 
 def get_mp4_file(path, correct_video):
-    default_filename = correct_video.default_filename
+    # replace the single and double quotes with nothing from the song name as it causes errors
+    default_filename = correct_video.default_filename.replace(
+        "'", "").replace('"', '')
+
     # if the path from the user doesn't have a "/" at the end we need to add it
     if not path.endswith("/"):
         return f"{path}/{default_filename}"
@@ -42,7 +45,10 @@ def get_mp4_file(path, correct_video):
 
 
 def make_mp3_file(path, correct_video, channel_name):
-    default_filename = correct_video.default_filename.replace(".mp4", ".mp3")
+    # replace the single and double quotes with nothing from the song name as it causes errors
+    default_filename = correct_video.default_filename.replace(
+        ".mp4", ".mp3").replace("'", "").replace('"', '')
+    channel_name = channel_name.replace("'", "").replace('"', '')
     # if the path from the user doesn't have a "/" at the end we need to add it
     if not path.endswith("/"):
         return f"{path}/{channel_name} - {default_filename}"
@@ -122,8 +128,10 @@ def main():
 
         # input filename for ffmpeg
         mp4_file = get_mp4_file(download_path, correct_video)
+        print(mp4_file)
         # output mp3 file (replace the default .mp4 in the filename with .mp3)
         mp3_output = make_mp3_file(download_path, correct_video, channel_name)
+        print(mp3_output)
 
         # command to convert mp4 to mp3 with ffmpeg. -i for input, -f for filetype, -ab for bitrate, -vn for no video
         convert_command = f"ffmpeg -i '{mp4_file}' -f mp3 -ab 192000 -vn '{mp3_output}'"

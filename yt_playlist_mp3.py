@@ -43,7 +43,9 @@ def filter_out_correct_video(video):
 
 
 def get_mp4_file(path, correct_video):
-    default_filename = correct_video.default_filename
+    # replace the single and double quotes with nothing from the song name as it causes errors
+    default_filename = correct_video.default_filename.replace(
+        "'", "").replace('"', '')
     # if the path from the user doesn't have a "/" at the end we need to add it
     if not path.endswith("/"):
         return f"{path}/{default_filename}"
@@ -52,7 +54,10 @@ def get_mp4_file(path, correct_video):
 
 
 def make_mp3_file(path, correct_video, channel_name):
-    default_filename = correct_video.default_filename.replace(".mp4", ".mp3")
+    # replace the single and double quotes with nothing from the song name as it causes errors
+    default_filename = correct_video.default_filename.replace(
+        ".mp4", ".mp3").replace("'", "").replace('"', '')
+    channel_name = channel_name.replace("'", "").replace('"', '')
     # if the path from the user doesn't have a "/" at the end we need to add it
     if not path.endswith("/"):
         return f"{path}/{channel_name} - {default_filename}"
