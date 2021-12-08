@@ -45,9 +45,9 @@ def make_mp3_file(path, correct_video, channel_name):
     default_filename = correct_video.default_filename.replace(".mp4", ".mp3")
     # if the path from the user doesn't have a "/" at the end we need to add it
     if not path.endswith("/"):
-        return f"'{path}/{channel_name} - {default_filename}'"
+        return f"{path}/{channel_name} - {default_filename}"
     else:
-        return f"'{path}{channel_name} - {default_filename}'"
+        return f"{path}{channel_name} - {default_filename}"
 
 
 def get_path_from_file():
@@ -113,7 +113,7 @@ def main():
         mp3_output = make_mp3_file(download_path, correct_video, channel_name)
 
         # command to convert mp4 to mp3 with ffmpeg. -i for input, -f for filetype, -ab for bitrate, -vn for no video
-        convert_command = f"ffmpeg -i '{mp4_file}' -f mp3 -ab 192000 -vn {mp3_output}"
+        convert_command = f"ffmpeg -i '{mp4_file}' -f mp3 -ab 192000 -vn '{mp3_output}'"
 
         # execute the convert command
         os.system(convert_command)
