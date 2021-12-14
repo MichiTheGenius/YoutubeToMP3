@@ -1,9 +1,10 @@
-# YoutubeDownloaderPython
+# YoutubeToMp3Python
 
 A program that converts a youtube link to a music mp3 file. It is written in python using the pytube module. It works best for Debian Linux systems because of the provided script that installs all the needed dependencies. But if you are able to make it work on Windows or other Linux Distributions go for it!
 
 ## Usage
-1. clone the repo
+1. open a terminal window
+2. clone the repo by entering this command
 	```sh
 	git clone https://github.com/MichiTheGenius/YoutubeToMp3Python
 	```

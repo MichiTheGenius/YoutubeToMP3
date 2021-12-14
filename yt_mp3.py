@@ -35,7 +35,7 @@ def filter_out_correct_video(video):
 def get_mp4_file(path, correct_video):
     # replace the single and double quotes with nothing from the song name as it causes errors
     default_filename = correct_video.default_filename.replace(
-        "'", "").replace('"', '')
+            "'", "").replace('"', '')
 
     # if the path from the user doesn't have a "/" at the end we need to add it
     if not path.endswith("/"):
@@ -47,7 +47,7 @@ def get_mp4_file(path, correct_video):
 def make_mp3_file(path, correct_video, channel_name):
     # replace the single and double quotes with nothing from the song name as it causes errors
     default_filename = correct_video.default_filename.replace(
-        ".mp4", ".mp3").replace("'", "").replace('"', '')
+            ".mp4", ".mp3").replace("'", "").replace('"', '')
     channel_name = channel_name.replace("'", "").replace('"', '')
     # if the path from the user doesn't have a "/" at the end we need to add it
     if not path.endswith("/"):
@@ -78,12 +78,12 @@ def change_path():
     if path_file_exists():
         current_path = get_path_from_file()
         new_path = input(
-            f"Enter a new download path (The current one is {current_path}): ")
+                f"Enter a new download path (The current one is {current_path}): ")
     else:
         new_path = input(
-            f"Enter a new download path: ")
+                f"Enter a new download path: ")
 
-    # if the inputted path is empty we don't write it ti the file
+        # if the inputted path is empty we don't write it ti the file
     if new_path != "":
         write_path_to_file(new_path)
 
@@ -99,7 +99,7 @@ def list_path():
 def main():
     while True:
         url = input(
-            "Enter url(or q to quit, c to change the path, l to list the path): ")
+                "Enter url(or q to quit, c to change the path, l to list the path): ")
         if url.lower() == 'q':
             break  # quit the loop -> program finishes
         elif url.lower() == 'c':
@@ -143,8 +143,8 @@ def main():
         os.remove(mp4_file)
 
         print_blue_text("finished converting!")
-        print_blue_text(f"Find your tunes in the folder {download_path}!")
 
+        print_red_text(f"Finished downloading all of your videos! Find your tunes in the folder {download_path}!")
 
-if __name__ == "__main__":
-    main()
+        if __name__ == "__main__":
+            main()
