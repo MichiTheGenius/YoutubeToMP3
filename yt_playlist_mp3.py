@@ -44,8 +44,7 @@ def filter_out_correct_video(video):
 
 def get_mp4_file(path, correct_video):
     # replace the single and double quotes with nothing from the song name as it causes errors
-    default_filename = correct_video.default_filename.replace(
-        "'", "").replace('"', '')
+    default_filename = correct_video.default_filename.replace("'", "").replace('"', '')
     # if the path from the user doesn't have a "/" at the end we need to add it
     if not path.endswith("/"):
         return f"{path}/{default_filename}"
@@ -55,8 +54,7 @@ def get_mp4_file(path, correct_video):
 
 def make_mp3_file(path, correct_video, channel_name):
     # replace the single and double quotes with nothing from the song name as it causes errors
-    default_filename = correct_video.default_filename.replace(
-        ".mp4", ".mp3").replace("'", "").replace('"', '')
+    default_filename = correct_video.default_filename.replace(".mp4", ".mp3").replace("'", "").replace('"', '')
     channel_name = channel_name.replace("'", "").replace('"', '')
     # if the path from the user doesn't have a "/" at the end we need to add it
     if not path.endswith("/"):
@@ -86,13 +84,11 @@ def change_path():
     new_path = ""
     if path_file_exists():
         current_path = get_path_from_file()
-        new_path = input(
-            f"Enter a new download path (The current one is {current_path}): ")
+        new_path = input(f"Enter a new download path (The current one is {current_path}): ")
     else:
-        new_path = input(
-            f"Enter a new download path: ")
+        new_path = input(f"Enter a new download path: ")
 
-    # if the inputted path is empty we don't write it ti the file
+        # if the inputted path is empty we don't write it ti the file
     if new_path != "":
         write_path_to_file(new_path)
 
@@ -107,8 +103,7 @@ def list_path():
 
 def main():
     while True:
-        playlist_url_input = input(
-            "Enter playlist url(or q to quit, c to change the path, l to list the path): ")
+        playlist_url_input = input("Enter playlist url(or q to quit, c to change the path, l to list the path): ")
         if playlist_url_input.lower() == 'q':
             quit()
         elif playlist_url_input.lower() == 'c':
@@ -125,12 +120,10 @@ def main():
     amount_of_videos = len(playlist_urls)
     print(f"You have {amount_of_videos} videos in your playlist")
     # first video should be 1 in youtube -> first element in array is 0 -> -1 solves the problem
-    start_index = int(
-        input("Enter the start index(The first video is always 1): ")) - 1
+    start_index = int(input("Enter the start index(The first video is always 1): ")) - 1
 
     # youtubes last video is e.g. 10 -> loop ends at 9 -> array ends at 9 -> perfect
-    end_index = int(
-        input(f"Enter the end index(the maximum is {amount_of_videos}): "))
+    end_index = int(input(f"Enter the end index(the maximum is {amount_of_videos}): "))
 
     for i in range(start_index, end_index):
         # make a video out of the current url in the loop that pytube can use
@@ -166,9 +159,8 @@ def main():
         os.remove(mp4_file)
 
         print_blue_text("finished converting!")
-    print_red_text(
-        f"Finished downloading all of your videos! Find your tunes in the folder {download_path}!")
+    print_red_text(f"Finished downloading all of your videos! Find your tunes in the folder {download_path}!")
 
 
-if __name__ == "__main__":
-    main()
+    if __name__ == "__main__":
+        main()
