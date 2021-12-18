@@ -31,6 +31,13 @@ def print_blue_text(text):
     print(f'{blue}{text}', end="")
     reset_color()
 
+def print_yellow_text(text):
+    print(f'{yellow}{text}', end="")
+    reset_color()
+
+def print_yellow_text(text):
+    print(f'{yellow}{text}', end="")
+    reset_color()
 
 def print_red_text(text):
     print(f'{red}{text}', end="")
@@ -134,6 +141,9 @@ def main():
         # get the current download path from the text file
         download_path = get_path_from_file()
         print_blue_text(f"video is downloading to {download_path}!")
+        
+        # i + 1 because the loop starts at 0 but youtube starts at 1
+        print_yellow_text(f"You are currently at video {i+1} of {end_index}")
 
         # get the audio file out of all the options
         correct_video = filter_out_correct_video(pytube_video)
