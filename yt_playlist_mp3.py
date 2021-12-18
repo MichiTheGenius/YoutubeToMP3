@@ -162,5 +162,5 @@ def main():
     print_red_text(f"Finished downloading all of your videos! Find your tunes in the folder {download_path}!")
 
 
-    if __name__ == "__main__":
-        main()
+if __name__ == "__main__":
+    main()
