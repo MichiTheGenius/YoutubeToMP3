@@ -22,16 +22,21 @@ A program that converts a youtube link to a music mp3 file. It is written in pyt
 	chmod +x ./requirements.sh
 	```
 5. choose whether you want to download a single video or videos from a playist
-	- for the former run:
+	- for for the single video run:
 	```sh
 	python3 yt_mp3.py
 	```
 
-	- for the latter run:
+	- for the playlist run:
 	```sh
 	python3 yt_playlist_mp3.py
 	```
-	
+
+	- for the playlist with multithreading run:
+	```sh
+	python3 yt_threading.py
+	```
+
 6. change the download path of your music -> enter c in the url field end enter a valid filepath
 7. follow the programs intructions
 
