@@ -59,7 +59,7 @@ def get_mp4_file(path, correct_video):
         return f"{path}{default_filename}"
 
 
-def make_mp3_file(path, correct_video, channel_name):
+def get_mp3_file(path, correct_video, channel_name):
     # replace the single and double quotes with nothing from the song name as it causes errors
     default_filename = correct_video.default_filename.replace(".mp4", ".mp3").replace("'", "").replace('"', '')
     channel_name = channel_name.replace("'", "").replace('"', '')
@@ -68,6 +68,14 @@ def make_mp3_file(path, correct_video, channel_name):
         return f"{path}/{channel_name} - {default_filename}"
     else:
         return f"{path}{channel_name} - {default_filename}"
+
+
+def convert_mp4_to_mp3(mp4_file, mp3_file):
+    # command to convert mp4 to mp3 with ffmpeg. -i for input, -f for filetype, -ab for bitrate, -vn for no video
+    convert_command = f"ffmpeg -i '{mp4_file}' -f mp3 -ab 192000 -vn '{mp3_file}'"
+
+    # execute the convert command
+    os.system(convert_command)
 
 
 def get_path_from_file():
@@ -157,14 +165,9 @@ def main():
         # input filename for ffmpeg
         mp4_file = get_mp4_file(download_path, correct_video)
         # output mp3 file (replace the default .mp4 in the filename with .mp3)
-        mp3_output = make_mp3_file(download_path, correct_video, channel_name)
-
-        # command to convert mp4 to mp3 with ffmpeg. -i for input, -f for filetype, -ab for bitrate, -vn for no video
-        convert_command = f"ffmpeg -i '{mp4_file}' -f mp3 -ab 192000 -vn '{mp3_output}'"
-
-        # execute the convert command
-        os.system(convert_command)
-
+        mp3_file = get_mp3_file(download_path, correct_video, channel_name)
+        
+        convert_mp4_to_mp3(mp4_file,mp3_file)
         # delete the remaining mp4 file we don't need anymore
         os.remove(mp4_file)
 
