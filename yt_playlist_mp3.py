@@ -103,7 +103,7 @@ def change_path():
     else:
         new_path = input(f"Enter a new download path: ")
 
-        # if the inputted path is empty we don't write it ti the file
+    # if the inputted path is empty we don't write it to the file
     if new_path != "":
         write_path_to_file(new_path)
 
