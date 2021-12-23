@@ -19,22 +19,24 @@ A program that converts a youtube link to a music mp3 file. It is written in pyt
 
 3. run the requirements.sh script in order to install all dependencies needed (You can look into it to check if you are ok with the things that will be installed)
 
-	i. if you are on a debian linux system run:
+	- if you are on a debian linux system run:
 	```sh
 	reqs/requirements_deb.sh
 	```
-	ii. if you are on an arch linux system run:
+
+	- if you are on an arch linux system run:
 	```sh
 	reqs/requirements_arch.sh
 	```
 
 4. (optional) if it does not work try making it executable with the command:
 
-    i. if you are on a debian linux system run:
+    - if you are on a debian linux system run:
 	```sh
 	chmod +x reqs/requirements_deb.sh
 	```
-	ii. if you are on an arch linux system run:
+
+	- if you are on an arch linux system run:
 	```sh
 	chmod +x reqs/requirements_arch.sh
 	```
