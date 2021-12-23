@@ -1,6 +1,6 @@
 # YoutubeToMP3Python
 
-A program that converts a youtube link to a music mp3 file. It is written in python using the pytube module. It works best for Debian Linux systems because of the provided script that installs all the needed dependencies. But if you are able to make it work on Windows or other Linux Distributions then go for it!
+A program that converts a youtube link to a music mp3 file. It is written in python using the pytube module. It works best for Debian and Arch Linux systems because of the provided script that installs all the needed dependencies. But if you are able to make it work on Windows or other Linux Distributions then go for it!
 
 ## Usage
 1. open a terminal window (the key-combination ctrl-alt-t opens a terminal in most linux distributions)
@@ -14,12 +14,22 @@ A program that converts a youtube link to a music mp3 file. It is written in pyt
 	```
 3. run the requirements.sh script in order to install all dependencies needed
 	(You can look into it to check if you are ok with the things that will be installed)
+	3.1 if you are on a debian linux system run:
 	```sh
-	./requirements.sh
+	reqs/requirements_deb.sh
+	```
+	3.2 if you are on an arch linux system run:
+	```sh
+	reqs/requirements_arch.sh
 	```
 4. (optional) if it does not work try making it executable with the command:
+	4.1 if you are on a debian linux system run:
 	```sh
-	chmod +x ./requirements.sh
+	chmod +x reqs/requirements_deb.sh
+	```
+	4.2 if you are on an arch linux system run:
+	```sh
+	chmod +x reqs/requirements_arch.sh
 	```
 5. choose whether you want to download a single video or videos from a playist
 	- for for the single video run:
