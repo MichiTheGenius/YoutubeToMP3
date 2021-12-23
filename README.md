@@ -14,7 +14,7 @@ A program that converts a youtube link to a music mp3 file. It is written in pyt
 	
 
 	```sh
-	cd YoutubeToMp3Python
+	cd YoutubeToMP3Python
 	```
 
 3. run the requirements.sh script in order to install all dependencies needed (You can look into it to check if you are ok with the things that will be installed)
