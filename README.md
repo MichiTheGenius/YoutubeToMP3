@@ -7,7 +7,7 @@ A program that converts a youtube link to a music mp3 file. It is written in pyt
 2. clone the repo by entering this command
 
 	```sh
-	git clone https://github.com/MichiTheGenius/YoutubeToMp3Python
+	git clone https://github.com/MichiTheGenius/YoutubeToMP3Python
 	```
 
 2. change into the newly acquired directory
