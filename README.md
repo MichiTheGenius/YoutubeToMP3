@@ -5,15 +5,20 @@ A program that converts a youtube link to a music mp3 file. It is written in pyt
 ## Usage
 1. open a terminal window (the key-combination ctrl-alt-t opens a terminal in most linux distributions)
 2. clone the repo by entering this command
+
 	```sh
 	git clone https://github.com/MichiTheGenius/YoutubeToMp3Python
 	```
+
 2. change into the newly acquired directory
+	
+
 	```sh
 	cd YoutubeToMp3Python
 	```
-3. run the requirements.sh script in order to install all dependencies needed
-	(You can look into it to check if you are ok with the things that will be installed)
+
+3. run the requirements.sh script in order to install all dependencies needed (You can look into it to check if you are ok with the things that will be installed)
+
 	i. if you are on a debian linux system run:
 	```sh
 	reqs/requirements_deb.sh
@@ -22,7 +27,9 @@ A program that converts a youtube link to a music mp3 file. It is written in pyt
 	```sh
 	reqs/requirements_arch.sh
 	```
+
 4. (optional) if it does not work try making it executable with the command:
+
     i. if you are on a debian linux system run:
 	```sh
 	chmod +x reqs/requirements_deb.sh
@@ -31,7 +38,9 @@ A program that converts a youtube link to a music mp3 file. It is written in pyt
 	```sh
 	chmod +x reqs/requirements_arch.sh
 	```
+
 5. choose whether you want to download a single video or videos from a playist
+
 	- for for the single video run:
 	```sh
 	python3 yt_mp3.py
