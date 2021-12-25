@@ -7,14 +7,14 @@ A program that converts a youtube link to a music mp3 OR video mp4 file. It is w
 2. clone the repo by entering this command
 
 	```sh
-	git clone https://github.com/MichiTheGenius/YoutubeToMP3Python
+	git clone https://github.com/MichiTheGenius/YoutubeToMP3-4
 	```
 
 2. change into the newly acquired directory
 	
 
 	```sh
-	cd YoutubeToMP3Python
+	cd YoutubeToMP3-4
 	```
 
 3. run the requirements.sh script in order to install all dependencies needed (You can look into it to check if you are ok with the things that will be installed)
@@ -40,9 +40,9 @@ A program that converts a youtube link to a music mp3 OR video mp4 file. It is w
 	```sh
 	chmod +x reqs/requirements_arch.sh
 	```
-
-5. choose whether you want to download a single video or videos from a playist
-
+5. choose whether you want to download a mp3 or mp4. 
+	- **For the mp3 follow:**
+   
 	- for for the single video run:
 	```sh
 	python3 yt_mp3.py
@@ -58,6 +58,11 @@ A program that converts a youtube link to a music mp3 OR video mp4 file. It is w
 	python3 yt_threading.py
 	```
 
+	- **for the mp4 follow:**
+	```sh
+	python3 yt_mp4.py
+	```
+   
 6. change the download path of your music -> enter c in the url field end enter a valid filepath
 
 7. follow the programs intructions
