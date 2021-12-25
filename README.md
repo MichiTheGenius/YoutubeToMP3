@@ -1,6 +1,6 @@
-# YoutubeToMP3Python
+# YoutubeToMP_3_4_
 
-A program that converts a youtube link to a music mp3 file. It is written in python using the pytube module. It works best for Debian and Arch Linux systems because of the provided script that installs all the needed dependencies. But if you are able to make it work on Windows or other Linux Distributions then go for it!
+A program that converts a youtube link to a music mp3 OR video mp4 file. It is written in python using the pytube module. It works best for Debian and Arch Linux systems because of the provided scripts that install all the needed dependencies. But if you are able to make it work on Windows or other Linux Distributions then go for it!
 
 ## Usage
 1. open a terminal window (the key-combination ctrl-alt-t opens a terminal in most linux distributions)
