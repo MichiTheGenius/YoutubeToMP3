@@ -32,13 +32,16 @@ def print_blue_text(text):
     print(f'{blue}{text}', end="")
     reset_color()
 
-def print_yellow_text(text):
-    print(f'{yellow}{text}', end="")
-    reset_color()
 
 def print_yellow_text(text):
     print(f'{yellow}{text}', end="")
     reset_color()
+
+
+def print_yellow_text(text):
+    print(f'{yellow}{text}', end="")
+    reset_color()
+
 
 def print_red_text(text):
     print(f'{red}{text}', end="")
@@ -52,7 +55,8 @@ def filter_out_correct_video(video):
 
 def get_mp4_file(path, correct_video):
     # replace the single and double quotes with nothing from the song name as it causes errors
-    default_filename = correct_video.default_filename.replace("'", "").replace('"', '')
+    default_filename = correct_video.default_filename.replace(
+        "'", "").replace('"', '')
     # if the path from the user doesn't have a "/" at the end we need to add it
     if not path.endswith("/"):
         return f"{path}/{default_filename}"
@@ -62,7 +66,8 @@ def get_mp4_file(path, correct_video):
 
 def get_mp3_file(path, correct_video, channel_name):
     # replace the single and double quotes with nothing from the song name as it causes errors
-    default_filename = correct_video.default_filename.replace(".mp4", ".mp3").replace("'", "").replace('"', '')
+    default_filename = correct_video.default_filename.replace(
+        ".mp4", ".mp3").replace("'", "").replace('"', '')
     channel_name = channel_name.replace("'", "").replace('"', '')
     # if the path from the user doesn't have a "/" at the end we need to add it
     if not path.endswith("/"):
@@ -70,12 +75,14 @@ def get_mp3_file(path, correct_video, channel_name):
     else:
         return f"{path}{channel_name} - {default_filename}"
 
+
 def convert_mp4_to_mp3(mp4_file, mp3_file):
     # command to convert mp4 to mp3 with ffmpeg. -i for input, -f for filetype, -ab for bitrate, -vn for no video
     convert_command = f"ffmpeg -i '{mp4_file}' -f mp3 -ab 192000 -vn '{mp3_file}'"
 
     # execute the convert command
     os.system(convert_command)
+
 
 def get_path_from_file():
     # open the path file and assign a path variable the content of that file
@@ -98,7 +105,8 @@ def change_path():
     new_path = ""
     if path_file_exists():
         current_path = get_path_from_file()
-        new_path = input(f"Enter a new download path (The current one is {current_path}): ")
+        new_path = input(
+            f"Enter a new download path (The current one is {current_path}): ")
     else:
         new_path = input(f"Enter a new download path: ")
 
@@ -114,6 +122,7 @@ def list_path():
     else:
         print("You don't have a path file yet! Create one by entering c in the url field.")
 
+
 def thread_main(start, end):
     # end + 1 because the loop leaves out the last number i.e if the end is 30 it ends at 29
     for i in range(start, end + 1):
@@ -125,7 +134,7 @@ def thread_main(start, end):
         # get the current download path from the text file
         download_path = get_path_from_file()
         print_blue_text(f"video is downloading to {download_path}!")
-        
+
         # i + 1 because the loop starts at 0 but youtube starts at 1
         print_yellow_text(f"You are currently at video {i+1} of {end_index}")
 
@@ -142,8 +151,8 @@ def thread_main(start, end):
         mp4_file = get_mp4_file(download_path, correct_video)
         # output mp3 file (replace the default .mp4 in the filename with .mp3)
         mp3_file = get_mp3_file(download_path, correct_video, channel_name)
-        
-        convert_mp4_to_mp3(mp4_file,mp3_file)
+
+        convert_mp4_to_mp3(mp4_file, mp3_file)
         # delete the remaining mp4 file we don't need anymore
         os.remove(mp4_file)
 
@@ -151,7 +160,8 @@ def thread_main(start, end):
 
 
 while True:
-    playlist_url_input = input("Enter playlist url(or q to quit, c to change the path, l to list the path): ")
+    playlist_url_input = input(
+        "Enter playlist url(or q to quit, c to change the path, l to list the path): ")
     if playlist_url_input.lower() == 'q':
         quit()
     elif playlist_url_input.lower() == 'c':
@@ -168,10 +178,12 @@ playlist_urls = get_playlist_urls(playlist_url_input)
 amount_of_videos = len(playlist_urls)
 print(f"You have {amount_of_videos} videos in your playlist")
 # first video should be 1 in youtube -> first element in array is 0 -> -1 solves the problem
-start_index = int(input("Enter the start index(The first video is always 1): ")) - 1
+start_index = int(
+    input("Enter the start index(The first video is always 1): ")) - 1
 
 # youtubes last video is e.g. 10 -> loop ends at 9 -> array ends at 9 -> perfect
-end_index = int(input(f"Enter the end index(the maximum is {amount_of_videos}): "))
+end_index = int(
+    input(f"Enter the end index(the maximum is {amount_of_videos}): "))
 
 my_indices = [i for i in range(start_index, end_index)]
 
@@ -183,5 +195,5 @@ for arr in my_index_split:
     start = arr[0]
     end = arr[-1]
     print(f'{start}-{end}')
-    my_thread = Thread(target = thread_main, args = (start, end, ))
+    my_thread = Thread(target=thread_main, args=(start, end, ))
     my_thread.start()
