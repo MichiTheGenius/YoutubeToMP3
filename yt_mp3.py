@@ -15,7 +15,13 @@ reset = "\u001b[0m"
 
 class Converter():
     def __init__(self):
-        while True:
+        if not self.path_file_exists():
+            print(
+                "You don't have a path file yet! Create one by entering c in the url field.")
+        self.download_video()
+
+    def download_video(self):
+        while 1:
             url = input(
                 "Enter url(or q to quit, c to change the path, l to list the path): ")
             if url.lower() == 'q':
@@ -139,4 +145,3 @@ class Converter():
 
 if __name__ == "__main__":
     converter = Converter()
-
