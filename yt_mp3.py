@@ -143,5 +143,5 @@ class Converter():
                 "You don't have a path file yet! Create one by entering c in the url field.")
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     converter = Converter()
