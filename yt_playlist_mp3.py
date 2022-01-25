@@ -100,7 +100,7 @@ class Converter():
 
     def change_path(self):
         new_path = ""
-        if sefl.path_file_exists():
+        if self.path_file_exists():
             current_path = self.get_path_from_file()
             new_path = input(f"Enter a new download path (The current one is {current_path}): ")
         else:
