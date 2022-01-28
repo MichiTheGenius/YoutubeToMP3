@@ -1,20 +1,20 @@
 # YoutubeToMP3
 
-A program that converts a youtube link to a music mp3 OR video mp4 file. It is written in python using the pytube module. It works best for Debian and Arch Linux systems because of the provided scripts that install all the needed dependencies. But if you are able to make it work on Windows or other Linux Distributions then go for it!
+A program that converts a youtube link to a music mp3 file. It is written in python using the pytube module. It works best for Debian and Arch Linux systems because of the provided scripts that install all the needed dependencies. But if you are able to make it work on Windows or other Linux Distributions then go for it!
 
 ## Usage
 1. open a terminal window (the key-combination ctrl-alt-t opens a terminal in most linux distributions)
 2. clone the repo by entering this command
 
 	```sh
-	git clone https://github.com/MichiTheGenius/YoutubeToMP3-4
+	git clone https://github.com/MichiTheGenius/YoutubeToMP3
 	```
 
 2. change into the newly acquired directory
 	
 
 	```sh
-	cd YoutubeToMP3-4
+	cd YoutubeToMP3
 	```
 
 3. run the requirements.sh script in order to install all dependencies needed (You can look into it to check if you are ok with the things that will be installed)
@@ -40,9 +40,7 @@ A program that converts a youtube link to a music mp3 OR video mp4 file. It is w
 	```sh
 	chmod +x reqs/requirements_arch.sh
 	```
-5. choose whether you want to download a mp3 or mp4. 
-	- **For the mp3 follow:**
-   
+5. run one of the following scripts: 
 	- for for the single video run:
 	```sh
 	python3 yt_mp3.py
@@ -58,10 +56,6 @@ A program that converts a youtube link to a music mp3 OR video mp4 file. It is w
 	python3 yt_threading.py
 	```
 
-	- **for the mp4 follow:**
-	```sh
-	python3 yt_mp4.py
-	```
    
 6. change the download path of your music -> enter c in the url field end enter a valid filepath
 
