@@ -16,26 +16,6 @@ class Converter():
         return video_urls
 
 
-    def reset_color(self):
-        print(colors.reset)
-
-
-    def print_blue_text(self,text):
-        print(f'{colors.blue}{text}', end="")
-        self.reset_color()
-
-    def print_yellow_text(self, text):
-        print(f'{colors.yellow}{text}', end="")
-        self.reset_color()
-
-    def print_yellow_text(self, text):
-        print(f'{colors.yellow}{text}', end="")
-        self.reset_color()
-
-    def print_red_text(self, text):
-        print(f'{colors.red}{text}', end="")
-        self.reset_color()
-
 
     def filter_out_correct_video(self, video):
         # get correct video format -> this took a lot of trying around to fine tune
@@ -141,19 +121,19 @@ class Converter():
 
             # get the current download path from the text file
             download_path = self.get_path_from_file()
-            self.print_blue_text(f"video is downloading to {download_path}!")
+            colors.print_blue_text(f"video is downloading to {download_path}!")
             
             # i + 1 because the loop starts at 0 but youtube starts at 1
-            self.print_yellow_text(f"You are currently at video {i+1} of {end_index}")
+            colors.print_yellow_text(f"You are currently at video {i+1} of {end_index}")
 
             # get the audio file out of all the options
             correct_video = self.filter_out_correct_video(pytube_video)
 
             # download that file
             correct_video.download(download_path)
-            self.print_blue_text("finished downloading!")
+            colors.print_blue_text("finished downloading!")
 
-            self.print_blue_text("converting to mp3!")
+            colors.print_blue_text("converting to mp3!")
 
             # input filename for ffmpeg
             mp4_file = self.get_mp4_file(download_path, correct_video)
@@ -164,8 +144,8 @@ class Converter():
             # delete the remaining mp4 file we don't need anymore
             os.remove(mp4_file)
 
-            self.print_blue_text("finished converting!")
-        self.print_red_text(f"Finished downloading all of your videos! Find your tunes in the folder {download_path}!")
+            colors.print_blue_text("finished converting!")
+        colors.print_red_text(f"Finished downloading all of your videos! Find your tunes in the folder {download_path}!")
 
 
 

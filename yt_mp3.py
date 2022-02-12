@@ -29,15 +29,15 @@ class Converter():
             channel_name = pytube.Channel(channel_url).channel_name
 
             download_path = self.get_path_from_file()
-            self.print_blue_text(f"video is downloading to {download_path}!")
+            colors.print_blue_text(f"video is downloading to {download_path}!")
 
             # get the audio file out of all the options
             correct_video = self.filter_out_correct_video(pytube_video)
 
             # download that file
             correct_video.download(download_path)
-            self.print_blue_text("finished downloading!")
-            self.print_blue_text("converting to mp3!")
+            colors.print_blue_text("finished downloading!")
+            colors.print_blue_text("converting to mp3!")
 
             # input filename for ffmpeg
             mp4_file = self.get_mp4_file(download_path, correct_video)
@@ -51,18 +51,7 @@ class Converter():
             # delete the remaining mp4 file we don't need anymore
             os.remove(mp4_file)
 
-            self.print_blue_text("finished converting!")
-
-    def reset_color(self):
-        print(colors.reset)
-
-    def print_blue_text(self, text):
-        print(f'{colors.blue}{text}', end="")
-        self.reset_color()
-
-    def print_red_text(self, text):
-        print(f'{colors.red}{text}', end="")
-        self.reset_color()
+            colors.print_blue_text("finished converting!")
 
     def filter_out_correct_video(self, video):
         # get correct video format -> this took a lot of trying around to fine tune
