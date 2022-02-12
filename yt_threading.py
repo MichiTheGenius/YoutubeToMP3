@@ -96,5 +96,5 @@ class Converter:
             my_thread = Thread(target=self.thread_main, args=(start, end, ))
             my_thread.start()
 
-
-Converter()
+if __name__ == "__main__":
+    converter = Converter()
