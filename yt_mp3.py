@@ -1,6 +1,7 @@
+from time import sleep
 import pytube
 import os
-
+from gui import my_gui
 # ansi color codes to print out colored text in the terminal
 black = "\u001b[30m"
 red = "\u001b[31m"
@@ -13,55 +14,41 @@ white = "\u001b[37m"
 reset = "\u001b[0m"
 
 
-class Converter():
+class Converter(my_gui):
     def __init__(self):
-        if not self.path_file_exists():
-            print(
-                "You don't have a path file yet! Create one by entering c in the url field.")
-        self.download_video()
+        super().__init__("YoutubeToMP3", self.download_video)
 
     def download_video(self):
-        while 1:
-            url = input(
-                "Enter url(or q to quit, c to change the path, l to list the path): ")
-            if url.lower() == 'q':
-                break  # quit the loop -> program finishes
-            elif url.lower() == 'c':
-                self.change_path()
-                continue  # jump to start of while loop -> ask the user again what he wants to do
-            elif url.lower() == 'l':
-                self.list_path()
-                continue
+        link = super().get_link()
+        # make a video out of the current url in the loop that pytube can use
+        pytube_video = pytube.YouTube(link)
+        channel_url = pytube_video.channel_url
+        channel_name = pytube.Channel(channel_url).channel_name
 
-            # make a video out of the current url in the loop that pytube can use
-            pytube_video = pytube.YouTube(url)
-            channel_url = pytube_video.channel_url
-            channel_name = pytube.Channel(channel_url).channel_name
+        download_path = super().get_path_from_file()
+        self.print_blue_text(f"video is downloading to {download_path}!")
 
-            download_path = self.get_path_from_file()
-            self.print_blue_text(f"video is downloading to {download_path}!")
+        # get the audio file out of all the options
+        correct_video = self.filter_out_correct_video(pytube_video)
 
-            # get the audio file out of all the options
-            correct_video = self.filter_out_correct_video(pytube_video)
+        # download that file
+        correct_video.download(download_path)
+        self.print_blue_text("finished downloading!")
+        self.print_blue_text("converting to mp3!")
 
-            # download that file
-            correct_video.download(download_path)
-            self.print_blue_text("finished downloading!")
-            self.print_blue_text("converting to mp3!")
+        # input filename for ffmpeg
+        mp4_file = self.get_mp4_file(download_path, correct_video)
 
-            # input filename for ffmpeg
-            mp4_file = self.get_mp4_file(download_path, correct_video)
+        # output mp3 file (replace the default .mp4 in the filename with .mp3)
+        mp3_file = self.get_mp3_file(
+            download_path, correct_video, channel_name)
 
-            # output mp3 file (replace the default .mp4 in the filename with .mp3)
-            mp3_file = self.get_mp3_file(
-                download_path, correct_video, channel_name)
+        self.convert_mp4_to_mp3(mp4_file, mp3_file)
 
-            self.convert_mp4_to_mp3(mp4_file, mp3_file)
+        # delete the remaining mp4 file we don't need anymore
+        os.remove(mp4_file)
 
-            # delete the remaining mp4 file we don't need anymore
-            os.remove(mp4_file)
-
-            self.print_blue_text("finished converting!")
+        self.print_blue_text("finished converting!")
 
     def reset_color(self):
         print(reset)
