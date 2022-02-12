@@ -9,16 +9,20 @@ cyan = "\u001b[36m"
 white = "\u001b[37m"
 reset = "\u001b[0m"
 
+
 def reset_color():
     print(reset)
+
 
 def print_blue_text(text):
     print(f'{blue}{text}', end="")
     reset_color()
 
+
 def print_yellow_text(text):
     print(f'{yellow}{text}', end="")
     reset_color()
+
 
 def print_red_text(text):
     print(f'{red}{text}', end="")

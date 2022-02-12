@@ -3,6 +3,7 @@ import os
 import colors
 import utils
 
+
 class Converter():
     def __init__(self):
         if not utils.path_file_exists():
@@ -52,6 +53,7 @@ class Converter():
             os.remove(mp4_file)
 
             colors.print_blue_text("finished converting!")
+
 
 if __name__ == '__main__':
     converter = Converter()
