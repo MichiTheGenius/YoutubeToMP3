@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import StringVar, filedialog
+from tkinter import filedialog
 import os
 
 
@@ -40,14 +40,13 @@ class my_gui():
     def get_link(self):
         self.link = self.link_entry.get()
         return self.link
-    
+
     def finished(self):
         self.finished_text.set('Finished!')
-    
 
     def downloading(self):
         self.finished_text.set('Downloading...')
-        
+
     def get_path_from_file(self):
         if os.path.isfile('path.txt'):
             with open('path.txt', 'r') as f:
@@ -61,10 +60,12 @@ class my_gui():
 
     def mainloop(self):
         self.window.mainloop()
-    
+
     def download(self, download_function):
         self.downloading()
+        # update the tk window so the text label updates
         self.window.update_idletasks()
+        # we run the function that is passed in as an argument
         download_function()
         self.finished()
         self.window.update_idletasks()
