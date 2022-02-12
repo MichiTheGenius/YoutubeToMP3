@@ -1,17 +1,7 @@
 import pytube
 import os
 from pytube import Playlist
-
-# ansi color codes to print out colored text in the terminal
-black = "\u001b[30m"
-red = "\u001b[31m"
-green = "\u001b[32m"
-yellow = "\u001b[33m"
-blue = "\u001b[34m"
-magenta = "\u001b[35m"
-cyan = "\u001b[36m"
-white = "\u001b[37m"
-reset = "\u001b[0m"
+import colors
 
 class Converter():
     def __init__(self):
@@ -27,23 +17,23 @@ class Converter():
 
 
     def reset_color(self):
-        print(reset)
+        print(colors.reset)
 
 
     def print_blue_text(self,text):
-        print(f'{blue}{text}', end="")
+        print(f'{colors.blue}{text}', end="")
         self.reset_color()
 
     def print_yellow_text(self, text):
-        print(f'{yellow}{text}', end="")
+        print(f'{colors.yellow}{text}', end="")
         self.reset_color()
 
     def print_yellow_text(self, text):
-        print(f'{yellow}{text}', end="")
+        print(f'{colors.yellow}{text}', end="")
         self.reset_color()
 
     def print_red_text(self, text):
-        print(f'{red}{text}', end="")
+        print(f'{colors.red}{text}', end="")
         self.reset_color()
 
 
