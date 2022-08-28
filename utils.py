@@ -72,7 +72,7 @@ def get_mp3_file(path, correct_video, channel_name):
 
 def convert_mp4_to_mp3(mp4_file, mp3_file):
     # command to convert mp4 to mp3 with ffmpeg. -i for input, -f for filetype, -ab for bitrate, -vn for no video
-    convert_command = f"ffmpeg -i '{mp4_file}' -f mp3 -ab 192000 -vn '{mp3_file}'"
+    convert_command = f"ffmpeg -loglevel quiet -i '{mp4_file}' -f mp3 -ab 192000 -vn '{mp3_file}'"
 
     # execute the convert command
     os.system(convert_command)

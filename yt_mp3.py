@@ -24,16 +24,18 @@ class Converter():
                 utils.list_path()
                 continue
 
+            # get the download path from the text file
+            download_path = utils.get_path_from_file()
+            colors.print_blue_text(f"video is downloading to {download_path}!")
+
             # make a video out of the current url in the loop that pytube can use
             pytube_video = pytube.YouTube(url)
             channel_url = pytube_video.channel_url
             channel_name = pytube.Channel(channel_url).channel_name
 
-            download_path = utils.get_path_from_file()
-            colors.print_blue_text(f"video is downloading to {download_path}!")
-
             # get the audio file out of all the options
             correct_video = utils.filter_out_correct_video(pytube_video)
+
 
             # download that file
             correct_video.download(download_path)
@@ -52,7 +54,7 @@ class Converter():
             # delete the remaining mp4 file we don't need anymore
             os.remove(mp4_file)
 
-            colors.print_blue_text("finished converting!")
+            colors.print_yellow_text("finished converting!")
 
 
 if __name__ == '__main__':
