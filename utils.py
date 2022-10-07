@@ -1,5 +1,5 @@
 import os
-
+from pytube import Playlist
 
 def get_path_from_file():
     # open the path file and assign a path variable the content of that file
@@ -8,6 +8,20 @@ def get_path_from_file():
         path = path_file.read()
     return path
 
+def get_playlist_urls(url):
+    # make an array with all video urls in the playlist with the help of pytube
+    playlist = Playlist(url)
+
+    video_urls = playlist.video_urls
+
+    return video_urls
+
+def compareVidVSPlaylist(url):
+    if "playlist" in url:
+        return "playlist"
+    elif "watch" in url:
+        return "video"
+    return "invalid"
 
 def path_file_exists():
     return os.path.isfile("path.txt")
