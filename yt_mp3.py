@@ -5,14 +5,15 @@ import utils
 
 
 class Converter():
-    def __init__(self):
-        if not utils.path_file_exists():
-            print(
-                "You don't have a path file yet! Create one by entering c in the url field.")
-        self.download_video()
+    def __init__(self, gui = False):
+        if gui == False:
+            if not utils.path_file_exists():
+                print(
+                    "You don't have a path file yet! Create one by entering c in the url field.")
+            self.download_video()
 
     
-    def download_gui(self, url):
+    def download_gui(self, url, isGui = False):
         # die url kommt vom gui
         url_kind = utils.compareVidVSPlaylist(url)
 
@@ -42,7 +43,7 @@ class Converter():
             mp3_file = utils.get_mp3_file(
                 download_path, correct_video, channel_name)
 
-            utils.convert_mp4_to_mp3(mp4_file, mp3_file)
+            utils.convert_mp4_to_mp3(mp4_file, mp3_file, isGui)
 
             # delete the remaining mp4 file we don't need anymore
             os.remove(mp4_file)
@@ -53,12 +54,16 @@ class Converter():
             amount_of_videos = len(playlist_urls)
             print(f"You have {amount_of_videos} videos in your playlist")
             # first video in youtube has index 1 -> first element in array has index 0 -> -1 solves the problem
-            start_index = int(
-                input("Enter the start index(The first video is always 1): ")) - 1
+            start_index = 0
+            if (isGui == False):
+                start_index = int(
+                    input("Enter the start index(The first video is always 1): ")) - 1
 
             # youtubes last video is e.g. 10 -> loop ends at 9 -> array ends at 9 -> perfect
-            end_index = int(
-                input(f"Enter the end index(the maximum is {amount_of_videos}): "))
+            end_index = amount_of_videos - 1
+            if (isGui == False):
+                end_index = int(
+                    input(f"Enter the end index(the maximum is {amount_of_videos}): "))
 
             for i in range(start_index, end_index):
                 # make a video out of the current url in the loop that pytube can use
@@ -88,7 +93,7 @@ class Converter():
                 mp3_file = utils.get_mp3_file(
                     download_path, correct_video, channel_name)
 
-                utils.convert_mp4_to_mp3(mp4_file, mp3_file)
+                utils.convert_mp4_to_mp3(mp4_file, mp3_file, isGui)
                 # delete the remaining mp4 file we don't need anymore
                 os.remove(mp4_file)
 
