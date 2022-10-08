@@ -26,6 +26,9 @@ def compareVidVSPlaylist(url):
 def path_file_exists():
     return os.path.isfile("path.txt")
 
+def check_path_is_valid(path):
+    return os.path.exists(path)
+
 
 def write_path_to_file(path):
     with open("path.txt", "w") as path_file:
@@ -84,9 +87,12 @@ def get_mp3_file(path, correct_video, channel_name):
         return f"{path}{channel_name} - {default_filename}"
 
 
-def convert_mp4_to_mp3(mp4_file, mp3_file):
+def convert_mp4_to_mp3(mp4_file, mp3_file, isGui = False):
     # command to convert mp4 to mp3 with ffmpeg. -i for input, -f for filetype, -ab for bitrate, -vn for no video
     convert_command = f"ffmpeg -loglevel quiet -i '{mp4_file}' -f mp3 -ab 192000 -vn '{mp3_file}'"
+    # automatically ovveride if file exists with -y as it is not handled in the ui yet
+    if isGui:
+        convert_command = f"ffmpeg -y -loglevel quiet -i '{mp4_file}' -f mp3 -ab 192000 -vn '{mp3_file}'"
 
     # execute the convert command
     os.system(convert_command)
