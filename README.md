@@ -13,14 +13,14 @@ If downloading a **playlist** from Youtube it **MUST** either be *public* or *un
 	git clone https://github.com/MichiTheGenius/YoutubeToMP3
 	```
 
-2. change into the newly acquired directory
+3. change into the newly acquired directory
 	
 
 	```sh
 	cd YoutubeToMP3
 	```
 
-3. run the requirements.sh script in order to install all dependencies needed (You can look into it to check if you are ok with the things that will be installed)
+4. run the requirements.sh script in order to install all dependencies needed (You can look into it to check if you are ok with the things that will be installed)
 
 	- if you are on a debian linux system run:
 	```sh
@@ -32,7 +32,7 @@ If downloading a **playlist** from Youtube it **MUST** either be *public* or *un
 	reqs/requirements_arch.sh
 	```
 
-4. (optional) if it does not work try making it executable with the command:
+5. (optional) if it does not work try making it executable with the command:
 
     - if you are on a debian linux system run:
 	```sh
@@ -43,28 +43,24 @@ If downloading a **playlist** from Youtube it **MUST** either be *public* or *un
 	```sh
 	chmod +x reqs/requirements_arch.sh
 	```
-5. run one of the following scripts: 
-	- for for the single video run:
+6. run one of the following scripts: 
+	- this script recognizes whether it is a playlist or single video you want to download:
 	```sh
 	python3 yt_mp3.py
 	```
 
-	- for the playlist run:
-	```sh
-	python3 yt_playlist_mp3.py
-	```
-
 	- for the playlist with multithreading run:
+	- (note: this is an experimental feature and rather a proof of concept)
 	```sh
 	python3 yt_threading.py
 	```
 
    
-6. change the download path of your music -> enter c in the url field end enter a valid filepath
+7. change the download path of your music -> enter c in the url field end enter a valid filepath
 
-7. follow the programs intructions
+8. follow the programs intructions
 
-### Help
+## Help
 - the indices asked from the playlist asked are the small numbers on the left of a playlist video
 
 - simply choose the start and end video end everything in between will be downloaded
