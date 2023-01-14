@@ -6,33 +6,32 @@ A program that converts a youtube link to a music mp3 file. It is written in pyt
 If downloading a **playlist** from Youtube it **MUST** either be *public* or *unlisted* for it to work
 
 ## Usage
-1. open a terminal window (the key-combination ctrl-alt-t opens a terminal in most linux distributions)
-2. clone the repo by entering this command
+1. clone the repo by entering this command
 
 	```sh
 	git clone https://github.com/MichiTheGenius/YoutubeToMP3
 	```
 
-3. change into the newly acquired directory
+2. change into the newly acquired directory
 	
 
 	```sh
 	cd YoutubeToMP3
 	```
 
-4. run the requirements.sh script in order to install all dependencies needed (You can look into it to check if you are ok with the things that will be installed)
+3. run the requirements.sh script in order to install all dependencies needed (You can look into it to check if you are ok with the things that will be installed)
 
-	- if you are on a debian linux system run:
+	- if you are on a debian linux based system run:
 	```sh
 	reqs/requirements_deb.sh
 	```
 
-	- if you are on an arch linux system run:
+	- if you are on an arch linux based system run:
 	```sh
 	reqs/requirements_arch.sh
 	```
 
-5. (optional) if it does not work try making it executable with the command:
+4. (optional) if it does not work try making it executable with the command:
 
     - if you are on a debian linux system run:
 	```sh
@@ -43,7 +42,8 @@ If downloading a **playlist** from Youtube it **MUST** either be *public* or *un
 	```sh
 	chmod +x reqs/requirements_arch.sh
 	```
-6. run one of the following scripts: 
+    
+5. run one of the following scripts: 
 	- this script recognizes whether it is a playlist or single video you want to download:
 	```sh
 	python3 yt_mp3.py
@@ -56,9 +56,9 @@ If downloading a **playlist** from Youtube it **MUST** either be *public* or *un
 	```
 
    
-7. change the download path of your music -> enter c in the url field end enter a valid filepath
+6. change the download path of your music -> enter c in the url field end enter a valid filepath
 
-8. follow the programs intructions
+7. follow the programs intructions
 
 ## Help
 - the indices asked from the playlist asked are the small numbers on the left of a playlist video
