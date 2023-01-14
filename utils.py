@@ -79,9 +79,9 @@ def get_mp3_file(path, correct_video, channel_name):
     channel_name = channel_name.replace("'", "").replace('"', '')
     # if the path from the user doesn't have a "/" at the end we need to add it
     if not path.endswith("/"):
-        return f"{path}/{channel_name} - {default_filename}"
+        return f"{path}/{default_filename} - {channel_name}"
     else:
-        return f"{path}{channel_name} - {default_filename}"
+        return f"{path}{default_filename} - {channel_name}"
 
 
 def convert_mp4_to_mp3(mp4_file, mp3_file):
