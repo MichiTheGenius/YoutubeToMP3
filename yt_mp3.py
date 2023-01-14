@@ -3,7 +3,6 @@ import os
 import colors
 import utils
 
-
 class Converter():
     def __init__(self):
         if not utils.path_file_exists():
@@ -113,9 +112,6 @@ class Converter():
 
             colors.print_blue_text("finished converting!")
 
-
-
-    
     def download_gui(self, url):
         # die url kommt vom gui
         url_kind = utils.compareVidVSPlaylist(url)
@@ -199,11 +195,6 @@ class Converter():
                 colors.print_blue_text("finished converting!")
         colors.print_red_text(
             f"Finished downloading all of your videos! Find your tunes in the folder {download_path}!")
-
-    
-
-            
-
 
 if __name__ == '__main__':
     converter = Converter()
