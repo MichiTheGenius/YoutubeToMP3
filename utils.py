@@ -74,14 +74,15 @@ def get_mp4_file(path, correct_video):
 
 def get_mp3_file(path, correct_video, channel_name):
     # replace the single and double quotes with nothing from the song name as it causes errors
-    default_filename = correct_video.default_filename.replace(
-        ".mp4", ".mp3").replace("'", "").replace('"', '')
+    video_title = correct_video.title.replace("'", "").replace('"', '')
+    #default_filename = correct_video.default_filename.replace(
+    #    ".mp4", ".mp3").replace("'", "").replace('"', '')
     channel_name = channel_name.replace("'", "").replace('"', '')
     # if the path from the user doesn't have a "/" at the end we need to add it
     if not path.endswith("/"):
-        return f"{path}/{default_filename} - {channel_name}"
+        return f"{path}/{video_title} - {channel_name}.mp3"
     else:
-        return f"{path}{default_filename} - {channel_name}"
+        return f"{path}{video_title} - {channel_name}.mp3"
 
 
 def convert_mp4_to_mp3(mp4_file, mp3_file):
