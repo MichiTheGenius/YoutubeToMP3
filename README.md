@@ -3,7 +3,12 @@
 A program that converts a youtube link to a music mp3 file. It is written in python using the pytube module. It works best for Debian and Arch Linux systems because of the provided scripts that install all the needed dependencies. But if you are able to make it work on Windows or other Linux Distributions then go for it!
 
 ## Important
-If downloading a **playlist** from Youtube it **MUST** either be *public* or *unlisted* for the program to work
+- If downloading a **playlist** from Youtube it **MUST** either be *public* or *unlisted* for the program to work
+- If you get any download related errors try to update the pytube library with the following command
+
+	```sh
+	pip3 install --upgrade --force-reinstall "git+https://github.com/pytube/pytube.git"
+	```
 
 ## Usage
 1. clone the repo by entering this command
