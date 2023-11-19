@@ -44,6 +44,6 @@ A program that converts a youtube link to a music mp3 file. It is written in pyt
 6. Follow the programs intructions
 
 ## Help
-- the indices asked from the playlist asked are the small numbers on the left of a playlist video
+- The indices asked from the playlist asked are the small numbers on the left of a playlist video
 
-- simply choose the start and end video end everything in between will be downloaded
+- Simply choose the start and end video end everything in between will be downloaded
