@@ -86,8 +86,9 @@ def get_mp3_file(path, title, channel_name):
     # default_filename = correct_video.default_filename.replace(
     #    ".mp4", ".mp3").replace("'", "").replace('"', '')
 
-    channel_name = channel_name.replace(
-        '\'', '').replace('"', '').replace('?', '')
+    channel_remove_tags = ['\'', '"', ' - Topic', 'Official ', ' Official']
+    for tag in channel_remove_tags:
+        channel_name = channel_name.replace(tag, '')
 
     # if the path from the user doesn't have a "/" at the end we need to add it
     if not path.endswith("/"):
@@ -110,7 +111,9 @@ def add_mp3_metadata(mp3_file, title, channel_name, album_name, year, ask_for_al
 
     artist_remove_tags = ['\'', '"', ' - Topic', 'Official ', ' Official']
     for tag in artist_remove_tags:
-        artist = channel_name.replace(tag, '')
+        channel_name = channel_name.replace(tag, '')
+
+    artist = channel_name
 
     if ask_for_album_and_date:
         command = f"id3v2 --artist '{artist}' --song '{
@@ -122,6 +125,7 @@ def add_mp3_metadata(mp3_file, title, channel_name, album_name, year, ask_for_al
     os.system(command)
 
 def print_help(ask_for_album_and_year):
+    print("")
     print("---Available commands---")
     print("q - quit the program")
     print("h - list this help message")
@@ -131,3 +135,4 @@ def print_help(ask_for_album_and_year):
         print("t - toggle whether you want to enter the album and year of the song (currently ON)")
     else:
         print("t - toggle whether you want to enter the album and year of the song (currently OFF)")
+    print("")
