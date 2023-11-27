@@ -1,6 +1,8 @@
 # YoutubeToMP3
 
-A program that converts a youtube link to a music mp3 file. It is written in python using the pytube module. It works best for Debian, Arch Linux and Fedora systems because of the provided instructions for installing all of the needed dependencies. But if you are able to make it work on Windows or other Linux Distributions then go for it!
+![demo](./demo.png)
+
+A program that converts a youtube link to a music mp3 file while adding useful metadata (name of artist, song title, year, album). It is written in python using the pytube module. It works best for Debian, Arch Linux and Fedora systems because of the provided instructions for installing all of the needed dependencies. But if you are able to make it work on Windows or other Linux Distributions then go for it!
 
 ## Important
 - If downloading a **playlist** from Youtube it **MUST** either be *public* or *unlisted* for the program to work
