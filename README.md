@@ -27,21 +27,22 @@ A program that converts a youtube link to a music mp3 file. It is written in pyt
 3. Follow the instructions in [INSTALL.md](./INSTALL.md) to install the needed dependencies.
 
 4. Run one of the following scripts: 
-	- this script recognizes whether it is a playlist or single video you want to download:
-	```sh
-	python3 yt_mp3.py
-	```
-
-	- for the playlist with multithreading run:
-	- (note: this is an experimental feature and rather a proof of concept)
-	```sh
-	python3 yt_threading.py
-	```
-
+	> this script recognizes whether it is a playlist or single video you want to download:
+	> > ```sh>
+	> > python3 yt_mp3.py
+	> > ```
+	> for the playlist with multithreading run:
+	>
+	> >```sh
+	> >python3 yt_threading.py
+	> >```
+	> (note: this is an experimental feature and rather a proof of concept)
    
-5. Change the download path of your music -> enter c in the url field end enter a valid filepath
+5. Change the download path of your music by entering `c` in the url field end providing a valid filepath (example: `/home/user/Music`)
 
-6. Follow the programs intructions
+6. The program automatically adds the artist's name as well as the song name to your mp3. Due to YouTube's limitations it is not able to fetch other data like the name of the album or the year the song was released. That is why the program implements a toggle that lets you chose whether you want to manually enter the album and year of the song. To use this toggle enter `t` in the url field
+
+7. Follow the programs' intructions
 
 ## Help
 - The indices asked from the playlist asked are the small numbers on the left of a playlist video

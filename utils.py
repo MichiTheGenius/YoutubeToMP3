@@ -1,12 +1,14 @@
 import os
 from pytube import Playlist
 
+
 def get_path_from_file():
     # open the path file and assign a path variable the content of that file
     path = ""
     with open("path.txt", "r") as path_file:
         path = path_file.read()
     return path
+
 
 def get_playlist_urls(url):
     # make an array with all video urls in the playlist with the help of pytube
@@ -16,12 +18,14 @@ def get_playlist_urls(url):
 
     return video_urls
 
-def compareVidVSPlaylist(url):
+
+def compare_vid_vs_playlist(url):
     if "playlist" in url:
         return "playlist"
     elif "watch" in url:
         return "video"
     return "invalid"
+
 
 def path_file_exists():
     return os.path.isfile("path.txt")
@@ -61,9 +65,9 @@ def filter_out_correct_video(video):
 
 
 def get_mp4_file(path, correct_video):
-    # replace the single and double quotes with nothing from the song name as it causes errors
+    # remove the single and double quotes from the song name as it causes errors
     default_filename = correct_video.default_filename.replace(
-        "'", "").replace('"', '')
+        '\'', '').replace('"', '')
 
     # if the path from the user doesn't have a "/" at the end we need to add it
     if not path.endswith("/"):
@@ -72,12 +76,15 @@ def get_mp4_file(path, correct_video):
         return f"{path}{default_filename}"
 
 
-def get_mp3_file(path, correct_video, channel_name):
-    # replace the single and double quotes with nothing from the song name as it causes errors
-    video_title = correct_video.title.replace("'", "").replace('"', '')
-    #default_filename = correct_video.default_filename.replace(
+def get_mp3_file(path, title, channel_name):
+    # remove the single and double quotes from the song name as it causes errors
+    video_title = title.replace('\'', '').replace('"', '')
+    # default_filename = correct_video.default_filename.replace(
     #    ".mp4", ".mp3").replace("'", "").replace('"', '')
-    channel_name = channel_name.replace("'", "").replace('"', '')
+
+    channel_name = channel_name.replace(
+        '\'', '').replace('"', '').replace('?', '')
+
     # if the path from the user doesn't have a "/" at the end we need to add it
     if not path.endswith("/"):
         return f"{path}/{video_title} - {channel_name}.mp3"
@@ -87,7 +94,25 @@ def get_mp3_file(path, correct_video, channel_name):
 
 def convert_mp4_to_mp3(mp4_file, mp3_file):
     # command to convert mp4 to mp3 with ffmpeg. -i for input, -f for filetype, -ab for bitrate, -vn for no video
-    convert_command = f"ffmpeg -loglevel quiet -i '{mp4_file}' -f mp3 -ab 192000 -vn '{mp3_file}'"
+    convert_command = f"ffmpeg -loglevel quiet -i '{
+        mp4_file}' -f mp3 -ab 192000 -vn '{mp3_file}'"
 
     # execute the convert command
     os.system(convert_command)
+
+
+def add_mp3_metadata(mp3_file, title, channel_name, album_name, year, ask_for_album_and_date):
+    song_title = title.replace('\'', '').replace('"', '')
+
+    artist_remove_tags = ['\'', '"', ' - Topic', 'Official ', ' Official']
+    for tag in artist_remove_tags:
+        artist = channel_name.replace(tag, '')
+
+    if ask_for_album_and_date:
+        command = f"id3v2 --artist '{artist}' --song '{
+            song_title}' --album '{album_name}' --year {year} '{mp3_file}'"
+    else:
+        command = f"id3v2 --artist '{artist}' --song '{
+            song_title}' '{mp3_file}'"
+
+    os.system(command)
