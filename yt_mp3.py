@@ -14,14 +14,12 @@ class Converter():
     def run(self):
         ask_for_album_and_year = False
         while 1:
-            if ask_for_album_and_year == False:
-                print("Enter url(or q to quit, c to change the path, l to list the path, t to toggle whether you want to enter the album name and year (currently it is OFF)):")
-            else:
-                print("Enter url(or q to quit, c to change the path, l to list the path, t to toggle whether you want to enter the album name and year (currently it is ON)):")
-
-            url = input()
+            url = input("Enter url(or q to quit, h to show help): ")
             if url.lower() == 'q':
                 quit()  # quit the loop -> program finishes
+            elif url.lower() == 'h':
+                utils.print_help(ask_for_album_and_year) 
+                continue
             elif url.lower() == 'c':
                 utils.change_path()
                 continue  # jump to start of while loop -> ask the user again what he wants to do
@@ -30,6 +28,10 @@ class Converter():
                 continue
             elif url.lower() == 't':
                 ask_for_album_and_year = not ask_for_album_and_year
+                if ask_for_album_and_year:
+                    print("enabled the ask_for_album_and_year flag!")
+                else:
+                    print("disabled the ask_for_album_and_year flag!")
                 continue
 
             url_kind = utils.compare_vid_vs_playlist(url)

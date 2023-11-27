@@ -46,9 +46,13 @@ def change_path():
         new_path = input(f"Enter a new download path: ")
 
     # if the inputted path is empty we don't write it to the file
-    if new_path != "":
+    if new_path == current_path:
+        print(f"download path is already set to {current_path}!")
+    elif new_path != "":
         write_path_to_file(new_path)
-
+        print(f"changed download path to {new_path}!")
+    else:
+        print("download path is empty!")
 
 def list_path():
     if path_file_exists():
@@ -116,3 +120,14 @@ def add_mp3_metadata(mp3_file, title, channel_name, album_name, year, ask_for_al
             song_title}' '{mp3_file}'"
 
     os.system(command)
+
+def print_help(ask_for_album_and_year):
+    print("---Available commands---")
+    print("q - quit the program")
+    print("h - list this help message")
+    print("c - change the download path of the music (e.g. /home/user/Music)")
+    print("l - list the current path of the music")
+    if ask_for_album_and_year:
+        print("t - toggle whether you want to enter the album and year of the song (currently ON)")
+    else:
+        print("t - toggle whether you want to enter the album and year of the song (currently OFF)")
