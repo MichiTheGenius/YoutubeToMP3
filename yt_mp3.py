@@ -63,10 +63,12 @@ class Converter():
         pytube_video = pytube.YouTube(url)
         channel_url = pytube_video.channel_url
         channel_name = pytube.Channel(channel_url).channel_name
+        print(channel_name)
 
         # get the audio file out of all the options
         correct_video = utils.filter_out_correct_video(pytube_video)
         title = correct_video.title
+        print(title)
 
         # download that file
         correct_video.download(download_path)

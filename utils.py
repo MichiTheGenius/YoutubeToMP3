@@ -1,6 +1,7 @@
 import os
 from pytube import Playlist
 
+artist_remove_tags = ['\'', '"', ' - Topic', 'Official ', ' Official', 'Official', 'VEVO']
 
 def get_path_from_file():
     # open the path file and assign a path variable the content of that file
@@ -86,8 +87,7 @@ def get_mp3_file(path, title, channel_name):
     # default_filename = correct_video.default_filename.replace(
     #    ".mp4", ".mp3").replace("'", "").replace('"', '')
 
-    channel_remove_tags = ['\'', '"', ' - Topic', 'Official ', ' Official']
-    for tag in channel_remove_tags:
+    for tag in artist_remove_tags:
         channel_name = channel_name.replace(tag, '')
 
     # if the path from the user doesn't have a "/" at the end we need to add it
@@ -109,7 +109,6 @@ def convert_mp4_to_mp3(mp4_file, mp3_file):
 def add_mp3_metadata(mp3_file, title, channel_name, album_name, year, ask_for_album_and_date):
     song_title = title.replace('\'', '').replace('"', '')
 
-    artist_remove_tags = ['\'', '"', ' - Topic', 'Official ', ' Official']
     for tag in artist_remove_tags:
         channel_name = channel_name.replace(tag, '')
 
