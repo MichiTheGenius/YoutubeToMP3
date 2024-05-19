@@ -1,7 +1,10 @@
 import os
 from pytube import Playlist
 
-artist_remove_tags = ['\'', '"', ' - Topic', 'Official ', ' Official', 'Official', 'VEVO']
+# the tags that Youtube adds to the channel name that are removed
+artist_remove_tags = ['\'', '"', ' - Topic',
+                      'Official ', ' Official', 'Official', 'VEVO']
+
 
 def get_path_from_file():
     # open the path file and assign a path variable the content of that file
@@ -12,15 +15,21 @@ def get_path_from_file():
 
 
 def get_playlist_urls(url):
+    """
+    return the array of urls from a Youtube playlist
+    """
     # make an array with all video urls in the playlist with the help of pytube
     playlist = Playlist(url)
-
-    video_urls = playlist.video_urls
-
-    return video_urls
+    return playlist.video_urls
 
 
 def compare_vid_vs_playlist(url):
+    """
+    check whether the url leads to a video or playlist
+    example :
+        video   : https://music.youtube.com/watch?v=hTWKbfoikeg&list=OLAK5uy_lYnxawfGdkGePjdFhIYaS6LjP-Md6UYf0
+        playlist: https://music.youtube.com/playlist?list=OLAK5uy_lYnxawfGdkGePjdFhIYaS6LjP-Md6UYf0
+    """
     if "playlist" in url:
         return "playlist"
     elif "watch" in url:
@@ -55,6 +64,7 @@ def change_path():
     else:
         print("download path is empty!")
 
+
 def list_path():
     if path_file_exists():
         current_path = get_path_from_file()
@@ -65,40 +75,53 @@ def list_path():
 
 
 def filter_out_correct_video(video):
-    # get correct video format -> this took a lot of trying around to fine tune
+    """
+    get correct video format from Youtube -> m4a
+    """
     return video.streams.filter(audio_codec="mp4a.40.2", mime_type="audio/mp4").first()
 
 
 def get_mp4_file(path, correct_video):
-    # remove the single and double quotes from the song name as it causes errors
-    default_filename = correct_video.default_filename.replace(
-        '\'', '').replace('"', '')
-
-    # if the path from the user doesn't have a "/" at the end we need to add it
+    """
+    combine the download path and default filename into one string
+    used for converting with ffmpeg and deleting after conversion
+    """
+    # if the path from the user doesn't have a trailing slash '/' at the end, it needs to be added
     if not path.endswith("/"):
-        return f"{path}/{default_filename}"
+        return f"{path}/{correct_video.default_filename}"
     else:
-        return f"{path}{default_filename}"
+        return f"{path}{correct_video.default_filename}"
+
+
+def get_artist_from_channel_name(channel_name):
+    """
+    remove tags like "VEVO", "Official" from the artist's name that Youtube adds to the channel name
+    """
+    for tag in artist_remove_tags:
+        channel_name = channel_name.replace(tag, '')
+    return channel_name
 
 
 def get_mp3_file(path, title, channel_name):
-    # remove the single and double quotes from the song name as it causes errors
-    video_title = title.replace('\'', '').replace('"', '')
-    # default_filename = correct_video.default_filename.replace(
-    #    ".mp4", ".mp3").replace("'", "").replace('"', '')
+    """
+    replace the .mp4 extension in the filename with .mp3
+    format the filename to: <song_title> - <artist>.mp3
+    """
+    # remove the single and double quotes from the song name as it causes errors with many filesystems
+    # song_title = title.replace('\'', '').replace('"', '')
 
-    for tag in artist_remove_tags:
-        channel_name = channel_name.replace(tag, '')
-
-    # if the path from the user doesn't have a "/" at the end we need to add it
+    artist = get_artist_from_channel_name(channel_name)
+    # if the path from the user doesn't have a trailing slash '/' at the end, it needs to be added
     if not path.endswith("/"):
-        return f"{path}/{video_title} - {channel_name}.mp3"
+        return f"{path}/{title} - {artist}.mp3"
     else:
-        return f"{path}{video_title} - {channel_name}.mp3"
+        return f"{path}{title} - {artist}.mp3"
 
 
 def convert_mp4_to_mp3(mp4_file, mp3_file):
-    # command to convert mp4 to mp3 with ffmpeg. -i for input, -f for filetype, -ab for bitrate, -vn for no video
+    """
+    convert mp4 to mp3 with ffmpeg. -i for input, -f for filetype, -ab for bitrate, -vn for no video
+    """
     convert_command = f"ffmpeg -loglevel quiet -i '{
         mp4_file}' -f mp3 -ab 192000 -vn '{mp3_file}'"
 
@@ -108,12 +131,8 @@ def convert_mp4_to_mp3(mp4_file, mp3_file):
 
 def add_mp3_metadata(mp3_file, title, channel_name, album_name, year, ask_for_album_and_date):
     song_title = title.replace('\'', '').replace('"', '')
-
-    for tag in artist_remove_tags:
-        channel_name = channel_name.replace(tag, '')
-
-    artist = channel_name
-
+    artist = get_artist_from_channel_name(channel_name)
+    # add the mp3 metadata with the 'id3v2' command line program
     if ask_for_album_and_date:
         command = f"id3v2 --artist '{artist}' --song '{
             song_title}' --album '{album_name}' --year {year} '{mp3_file}'"
@@ -123,7 +142,10 @@ def add_mp3_metadata(mp3_file, title, channel_name, album_name, year, ask_for_al
 
     os.system(command)
 
+
 def print_help(ask_for_album_and_year):
+    print("")
+    print("A command line program to download music from Youtube")
     print("")
     print("---Available commands---")
     print("q - quit the program")
@@ -131,7 +153,7 @@ def print_help(ask_for_album_and_year):
     print("c - change the download path of the music (e.g. /home/user/Music)")
     print("l - list the current path of the music")
     if ask_for_album_and_year:
-        print("t - toggle whether you want to enter the album and year of the song (currently ON)")
+        print("a - toggle whether you want to enter the album and year of the song (currently ON)")
     else:
-        print("t - toggle whether you want to enter the album and year of the song (currently OFF)")
+        print("a - toggle whether you want to enter the album and year of the song (currently OFF)")
     print("")
