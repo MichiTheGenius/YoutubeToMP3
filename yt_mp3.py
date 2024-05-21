@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import pytube
 import os
 import colors
