@@ -2,8 +2,7 @@ import os
 from pytube import Playlist
 
 # the tags that Youtube adds to the channel name that are removed
-artist_remove_tags = ['\'', '"', ' - Topic',
-                      'Official ', ' Official', 'Official', 'VEVO']
+artist_remove_tags = [' - Topic', 'Official ', ' Official', 'Official', 'VEVO']
 
 
 def get_path_from_file():
@@ -122,23 +121,26 @@ def convert_mp4_to_mp3(mp4_file, mp3_file):
     """
     convert mp4 to mp3 with ffmpeg. -i for input, -f for filetype, -ab for bitrate, -vn for no video
     """
-    convert_command = f"ffmpeg -loglevel quiet -i '{
-        mp4_file}' -f mp3 -ab 192000 -vn '{mp3_file}'"
+    convert_command = f"ffmpeg -loglevel quiet -i \"{
+        mp4_file}\" -f mp3 -ab 192000 -vn \"{mp3_file}\""
+    print(f"convert command: {convert_command}")
 
     # execute the convert command
     os.system(convert_command)
 
 
 def add_mp3_metadata(mp3_file, title, channel_name, album_name, year, ask_for_album_and_date):
-    song_title = title.replace('\'', '').replace('"', '')
+    song_title = title
     artist = get_artist_from_channel_name(channel_name)
     # add the mp3 metadata with the 'id3v2' command line program
     if ask_for_album_and_date:
-        command = f"id3v2 --artist '{artist}' --song '{
-            song_title}' --album '{album_name}' --year {year} '{mp3_file}'"
+        command = f"id3v2 --artist \"{artist}\" --song \"{
+            song_title}\" --album \"{album_name}\" --year {year} \"{mp3_file}\""
     else:
-        command = f"id3v2 --artist '{artist}' --song '{
-            song_title}' '{mp3_file}'"
+        command = f"id3v2 --artist \"{artist}\" --song \"{
+            song_title}\" \"{mp3_file}\""
+
+    print(f"metadata command: {command}")
 
     os.system(command)
 
