@@ -47,6 +47,7 @@ def write_path_to_file(path):
 
 def change_path():
     new_path = ""
+    current_path = ""
     if path_file_exists():
         current_path = get_path_from_file()
         new_path = input(
@@ -123,7 +124,7 @@ def convert_mp4_to_mp3(mp4_file, mp3_file):
     """
     convert_command = f"ffmpeg -loglevel quiet -i \"{
         mp4_file}\" -f mp3 -ab 192000 -vn \"{mp3_file}\""
-    print(f"convert command: {convert_command}")
+    #print(f"convert command: {convert_command}")
 
     # execute the convert command
     os.system(convert_command)
@@ -140,7 +141,7 @@ def add_mp3_metadata(mp3_file, title, channel_name, album_name, year, ask_for_al
         command = f"id3v2 --artist \"{artist}\" --song \"{
             song_title}\" \"{mp3_file}\""
 
-    print(f"metadata command: {command}")
+    #print(f"metadata command: {command}")
 
     os.system(command)
 

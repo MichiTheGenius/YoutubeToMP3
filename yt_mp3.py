@@ -88,7 +88,7 @@ def run():
             if ask_for_album_and_year:
                 print("Enabled the ask_for_album_and_year flag.")
                 print(
-                    "After entering an url you will be prompted to enter the name of the album, as well the year the song was released in.")
+                    "After entering an url you will be prompted to enter the name of the album, as well as the year the song was released in.")
             else:
                 print("disabled the ask_for_album_and_year flag!")
             continue
