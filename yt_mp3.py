@@ -10,7 +10,7 @@ def download_single_video(download_path, url, ask_for_album_and_year):
     if ask_for_album_and_year:
         album_name = input(
             "Enter the name of the album the song belongs to: ")
-        year = input("Enter the year the song was released: ")
+        year = input("Enter the year the song was released in: ")
     else:
         album_name = ''
         year = 0
@@ -37,7 +37,7 @@ def download_single_video(download_path, url, ask_for_album_and_year):
     # use ffmpeg to convert the downloaded mp4 to an mp3
     utils.convert_mp4_to_mp3(mp4_file, mp3_file)
 
-    # delete the remaining mp4 file because it is not needed anymore
+    # delete the remaining mp4 file
     os.remove(mp4_file)
 
     # add the mp3 metadata: song title, artist, (if the ask_for_album_and_year flag is set) album, year
