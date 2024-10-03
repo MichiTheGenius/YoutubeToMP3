@@ -8,8 +8,7 @@ import utils
 def download_single_video(download_path, url, ask_for_album_and_year):
     # ask the user for the album and year of the song
     if ask_for_album_and_year:
-        album_name = input(
-            "Enter the name of the album the song belongs to: ")
+        album_name = input("Enter the name of the album the song belongs to: ")
         year = input("Enter the year the song was released in: ")
     else:
         album_name = ''
@@ -62,8 +61,7 @@ def download_playlist(download_path, url, ask_for_album_and_year):
 
     for i in range(start_index, end_index):
         # i + 1 because the loop starts at 0 but youtube starts at 1
-        colors.print_yellow_text(
-            f"Currently at video {i+1} of {end_index}...")
+        colors.print_yellow_text(f"Currently at video {i+1} of {end_index}...")
         download_single_video(
             download_path, playlist_urls[i], ask_for_album_and_year)
 
@@ -87,8 +85,7 @@ def run():
             ask_for_album_and_year = not ask_for_album_and_year
             if ask_for_album_and_year:
                 print("Enabled the ask_for_album_and_year flag.")
-                print(
-                    "After entering an url you will be prompted to enter the name of the album, as well as the year the song was released in.")
+                print("After entering an url you will be prompted to enter the name of the album, as well as the year the song was released in.")
             else:
                 print("disabled the ask_for_album_and_year flag!")
             continue
@@ -103,11 +100,9 @@ def run():
             download_playlist(
                 download_path, url, ask_for_album_and_year)
 
-        colors.print_red_text(
-            f"Finished downloading all of your songs! Find your files in the folder {download_path}!")
+        colors.print_red_text(f"Finished downloading all of your songs! Find your files in the folder {download_path}!")
 
 
 if not utils.path_file_exists():
-    print(
-        "You don't have a path file yet! Create one by entering c in the url field.")
+    print("You don't have a path file yet! Create one by entering c in the url field.")
 run()
