@@ -1,5 +1,5 @@
 import os
-from pytube import Playlist
+from pytubefix import Playlist
 
 # the tags that Youtube adds to the channel name that are removed
 artist_remove_tags = [' - Topic', 'Official ', ' Official', 'Official', 'VEVO']
