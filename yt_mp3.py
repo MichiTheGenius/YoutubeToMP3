@@ -67,9 +67,12 @@ def download_playlist(download_path, url, ask_for_album_and_year):
 
 
 def run():
+    if not utils.path_file_exists():
+        print("You don't have a path file yet! Create one by entering c in the url field.")
     ask_for_album_and_year = False
+    utils.print_help(ask_for_album_and_year)
     while 1:
-        url = input("Enter url(or q to quit, h to show help): ")
+        url = input("Enter a YouTube URL or a command from above: ")
         if url.lower() == 'q':
             quit()  # quit the loop -> program finishes
         elif url.lower() == 'h':
@@ -100,9 +103,9 @@ def run():
             download_playlist(
                 download_path, url, ask_for_album_and_year)
 
-        colors.print_red_text(f"Finished downloading all of your songs! Find your files in the folder {download_path}!")
+        colors.print_red_text(
+            f"Finished downloading all of your songs! Find your files in the folder {download_path}!")
 
 
-if not utils.path_file_exists():
-    print("You don't have a path file yet! Create one by entering c in the url field.")
-run()
+if __name__ == '__main__':
+    run()
