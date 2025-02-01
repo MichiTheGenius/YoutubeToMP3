@@ -1,5 +1,6 @@
 import os
 from pytubefix import Playlist
+import eyed3
 
 # the tags that Youtube adds to the channel name that are removed
 artist_remove_tags = [' - Topic', 'Official ', ' Official', 'Official', 'VEVO']
@@ -127,18 +128,23 @@ def convert_mp4_to_mp3(mp4_file, mp3_file):
     os.system(convert_command)
 
 
-def add_mp3_metadata(mp3_file, title, channel_name, album_name, year, ask_for_album_and_date):
-    song_title = title
+def add_mp3_metadata(mp3_file, song_title, channel_name, album_name, year, ask_for_album_and_date):
     artist = get_artist_from_channel_name(channel_name)
-    # add the mp3 metadata with the 'id3v2' command line program
+
+    audiofile = eyed3.load(mp3_file)
+    if audiofile.tag is None:
+        audiofile.initTag()
+
     if ask_for_album_and_date:
-        command = f"id3v2 --artist \"{artist}\" --song \"{song_title}\" --album \"{album_name}\" --year {year} \"{mp3_file}\""
-    else:
-        command = f"id3v2 --artist \"{artist}\" --song \"{song_title}\" \"{mp3_file}\""
+        audiofile.tag.album = album_name
+        audiofile.tag.recording_date = str(year)
 
-    # print(f"metadata command: {command}")
+    audiofile.tag.artist = artist
+    audiofile.tag.title = song_title
 
-    os.system(command)
+    # add the mp3 metadata with the eyed3 module
+    # it is important so set utf-8 encoding to that non-ascii characters (like the cyrillic alphapet) are displayed correctly
+    audiofile.tag.save(encoding='utf-8')
 
 
 def print_help(ask_for_album_and_year):
@@ -147,11 +153,11 @@ def print_help(ask_for_album_and_year):
     print("")
     print("---Available commands---")
     print("q - quit the program")
-    print("h - list this help message")
-    print("c - change the download path of the music (e.g. /home/user/Music)")
-    print("l - list the current path of the music")
+    print("h - show this help message")
+    print("c - change the destination path of the music (e.g. /home/user/Music)")
+    print("l - list the current destination path of the music")
     if ask_for_album_and_year:
-        print("a - toggle whether you want to enter the album and year of the song (currently ON)")
+        print("a - toggle to add album title and year of release (ON) | entered manually after entering URL")
     else:
-        print("a - toggle whether you want to enter the album and year of the song (currently OFF)")
+        print("a - toggle to add album title and year of release (OFF) | entered manually after entering URL")
     print("")
