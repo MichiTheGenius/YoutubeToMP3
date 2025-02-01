@@ -6,7 +6,7 @@ import utils
 
 
 def download_single_video(download_path, url, ask_for_album_and_year):
-    # ask the user for the album and year of the song
+    # ask the user for the album and year of the song if ask_for_album_and_year:
     if ask_for_album_and_year:
         album_name = input("Enter the name of the album the song belongs to: ")
         year = input("Enter the year the song was released in: ")
@@ -40,6 +40,7 @@ def download_single_video(download_path, url, ask_for_album_and_year):
     os.remove(mp4_file)
 
     # add the mp3 metadata: song title, artist, (if the ask_for_album_and_year flag is set) album, year
+    colors.print_blue_text("Adding metadata...")
     utils.add_mp3_metadata(mp3_file, title, channel_name,
                            album_name, year, ask_for_album_and_year)
 
@@ -87,10 +88,9 @@ def run():
         elif url.lower() == 'a':
             ask_for_album_and_year = not ask_for_album_and_year
             if ask_for_album_and_year:
-                print("Enabled the ask_for_album_and_year flag.")
-                print("After entering an url you will be prompted to enter the name of the album, as well as the year the song was released in.")
+                print("album and year toggle switched ON.")
             else:
-                print("disabled the ask_for_album_and_year flag!")
+                print("album and year toggle switched OFF.")
             continue
 
         url_kind = utils.compare_vid_vs_playlist(url)
