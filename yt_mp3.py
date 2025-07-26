@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import pytubefix
+import pytubefix as pytube
 import os
 import colors
 import utils
@@ -16,8 +16,8 @@ def download_single_video(download_path, url, ask_for_album_and_year):
     colors.print_blue_text(f"Video is downloading to {download_path}...")
 
     # make a video out of the current url that pytube can use
-    pytube_video = pytubefix.YouTube(url)
-    channel_name = pytubefix.Channel(pytube_video.channel_url).channel_name
+    pytube_video = pytube.YouTube(url)
+    channel_name = pytube.Channel(pytube_video.channel_url).channel_name
 
     # get the audio file out of all the options
     correct_video = utils.filter_out_correct_video(pytube_video)
